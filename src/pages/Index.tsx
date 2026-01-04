@@ -87,8 +87,12 @@ export default function Index() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0a0e27] via-[#14192f] to-[#0a0e27] text-foreground">
-      <div className="star-field fixed inset-0 opacity-50" />
+    <div className="min-h-screen bg-gradient-to-b from-[#0a0e27] via-[#14192f] to-[#0a0e27] text-foreground relative">
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+        style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/1c5d0868-b6ca-4649-afa7-7767c9a48618.jpg)' }}
+      />
+      <div className="star-field fixed inset-0 opacity-30" />
       
       <div 
         className="fixed w-20 h-20 pointer-events-none transition-all duration-100 z-50"
