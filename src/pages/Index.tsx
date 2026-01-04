@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -42,6 +42,21 @@ export default function Index() {
   const [selectedRace, setSelectedRace] = useState(0);
   const [battleLog, setBattleLog] = useState<string[]>([]);
   const [isSimulating, setIsSimulating] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
+  const [spaceshipPosition, setSpaceshipPosition] = useState({ x: -100, y: 50 });
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSpaceshipPosition(prev => {
+        const newX = prev.x + 0.5;
+        if (newX > 110) {
+          return { x: -100, y: Math.random() * 80 + 10 };
+        }
+        return { x: newX, y: prev.y };
+      });
+    }, 30);
+    return () => clearInterval(interval);
+  }, []);
 
   const simulateBattle = () => {
     setIsSimulating(true);
@@ -75,6 +90,21 @@ export default function Index() {
     <div className="min-h-screen bg-gradient-to-b from-[#0a0e27] via-[#14192f] to-[#0a0e27] text-foreground">
       <div className="star-field fixed inset-0 opacity-50" />
       
+      <div 
+        className="fixed w-20 h-20 pointer-events-none transition-all duration-100 z-50"
+        style={{ 
+          left: `${spaceshipPosition.x}%`, 
+          top: `${spaceshipPosition.y}%`,
+          transform: 'translate(-50%, -50%)'
+        }}
+      >
+        <div className="relative w-full h-full">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent blur-xl" />
+          <Icon name="Rocket" size={48} className="text-primary glow animate-pulse" style={{ transform: 'rotate(-45deg)' }} />
+          <div className="absolute -right-4 top-1/2 w-12 h-1 bg-gradient-to-r from-primary to-transparent blur-sm" />
+        </div>
+      </div>
+      
       <section className="relative min-h-screen flex items-center justify-center px-4">
         <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-30" />
         
@@ -92,7 +122,11 @@ export default function Index() {
           </p>
           
           <div className="flex flex-wrap gap-4 justify-center mt-8">
-            <Button size="lg" className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-glow">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-primary text-primary-foreground hover:bg-primary/90 animate-pulse-glow"
+              onClick={() => setShowRegistration(true)}
+            >
               <Icon name="Rocket" className="mr-2" size={24} />
               Начать игру
             </Button>
@@ -364,6 +398,85 @@ export default function Index() {
           </Card>
         </div>
       </section>
+
+      {showRegistration && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in" onClick={() => setShowRegistration(false)}>
+          <Card className="w-full max-w-md bg-card border-primary/50" onClick={(e) => e.stopPropagation()}>
+            <CardHeader className="relative">
+              <button 
+                onClick={() => setShowRegistration(false)}
+                className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Icon name="X" size={24} />
+              </button>
+              <CardTitle className="text-3xl glow text-primary flex items-center gap-3">
+                <Icon name="Rocket" size={32} />
+                Регистрация
+              </CardTitle>
+              <CardDescription>Присоединяйся к 500,000+ игрокам</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Позывной командира</label>
+                <input 
+                  type="text" 
+                  placeholder="Введи свой ник"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Email</label>
+                <input 
+                  type="email" 
+                  placeholder="твой@email.com"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Пароль</label>
+                <input 
+                  type="password" 
+                  placeholder="Минимум 8 символов"
+                  className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Выбери расу</label>
+                <div className="grid grid-cols-3 gap-2">
+                  {races.map((race, index) => (
+                    <button
+                      key={index}
+                      className={`p-3 rounded-lg border-2 transition-all hover:scale-105 ${
+                        selectedRace === index 
+                          ? 'border-primary bg-primary/20' 
+                          : 'border-border bg-card hover:border-primary/50'
+                      }`}
+                      onClick={() => setSelectedRace(index)}
+                    >
+                      <div className={`text-2xl mb-1 ${race.color}`}>
+                        {race.name === 'Люди' ? '👨‍🚀' : race.name === 'Жуки' ? '🐛' : '🤖'}
+                      </div>
+                      <div className="text-xs font-semibold">{race.name}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-6 text-lg font-bold animate-pulse-glow">
+                <Icon name="Sparkles" className="mr-2" size={20} />
+                Начать завоевание
+              </Button>
+
+              <p className="text-xs text-center text-muted-foreground">
+                Регистрируясь, ты принимаешь условия использования и политику конфиденциальности
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <footer className="relative py-12 px-4 border-t border-border/50">
         <div className="max-w-7xl mx-auto text-center space-y-4">
