@@ -92,5 +92,47 @@
       radial-gradient(1px 1px at 15% 90%, white, transparent);
     background-size: 200% 200%;
     background-position: 0% 0%;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .section-transition {
+    position: relative;
+  }
+
+  .section-transition::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(10, 14, 39, 0.8));
+    pointer-events: none;
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }

@@ -109,10 +109,10 @@ export default function Index() {
         </div>
       </div>
       
-      <section className="relative min-h-screen flex items-center justify-center px-4">
+      <section className="relative min-h-screen flex items-center justify-center px-4 section-transition">
         <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent opacity-30" />
         
-        <div className="max-w-6xl mx-auto text-center space-y-8 animate-fade-in relative z-10">
+        <div className="max-w-6xl mx-auto text-center space-y-8 animate-slide-up relative z-10">
           <Badge className="text-lg px-6 py-2 bg-primary/20 border-primary text-primary glow" variant="outline">
             ALPHA 2.0
           </Badge>
@@ -157,13 +157,13 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="relative py-24 px-4">
+      <section className="relative py-24 px-4 section-transition">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/bb641f75-1296-49f8-b936-0bf14edd30e9.jpg)' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30 animate-shimmer"
+          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/bb641f75-1296-49f8-b936-0bf14edd30e9.jpg)', backgroundSize: '200% 200%' }}
         />
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-5xl md:text-6xl font-bold mb-4 glow">
               Исследуй <span className="text-primary">Галактику</span>
             </h2>
@@ -202,13 +202,13 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="relative py-24 px-4">
+      <section className="relative py-24 px-4 section-transition">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25"
-          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/837de4df-8859-4aef-b493-294de77ffc9c.jpg)' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 animate-shimmer"
+          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/837de4df-8859-4aef-b493-294de77ffc9c.jpg)', backgroundSize: '200% 200%' }}
         />
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-5xl md:text-6xl font-bold mb-4 glow">
               Выбери свою <span className="text-secondary">Расу</span>
             </h2>
@@ -316,13 +316,13 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-card/20 to-transparent">
+      <section className="relative py-24 px-4 bg-gradient-to-b from-transparent via-card/20 to-transparent section-transition">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/b0782cbd-ef02-4927-ba01-6eee724df9ef.jpg)' }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 animate-shimmer"
+          style={{ backgroundImage: 'url(https://cdn.poehali.dev/projects/6af4ac5b-b19e-4a52-a2dd-5f4c176712f7/files/b0782cbd-ef02-4927-ba01-6eee724df9ef.jpg)', backgroundSize: '200% 200%' }}
         />
         <div className="max-w-5xl mx-auto relative z-10">
-          <div className="text-center mb-16 animate-fade-in">
+          <div className="text-center mb-16 animate-slide-up">
             <h2 className="text-5xl md:text-6xl font-bold mb-4 glow">
               Испытай <span className="text-destructive">Геймплей</span>
             </h2>
